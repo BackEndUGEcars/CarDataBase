@@ -122,7 +122,6 @@ public class Car implements ICar{
     }
 
     public static Car createCar(String json) throws ParseException {
-        System.out.println("json" + json);
         JSONParser parser = new JSONParser();
         var jsonObject = (JSONObject) parser.parse(json);
         var car = new Car();

@@ -1,5 +1,8 @@
 package fr.uge.webservices;
 
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.util.Map;
 
 public interface ICarDataBase {
@@ -9,5 +12,6 @@ public interface ICarDataBase {
     Map<Long, ICar> getBuyableCar();
     String toJson();
     Map<Long, ICar> getAllCars();
+    void init() throws IOException, ParseException;
 
 }

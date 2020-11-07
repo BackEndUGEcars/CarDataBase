@@ -82,5 +82,6 @@ public class CarDataBase implements ICarDataBase{
             var c = Car.createCar(s);
             carMap.put((Long) jo.get("id"), c);
         }
+        idMap = (long) jsonObject.get("idMap");
     }
 }
