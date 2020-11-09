@@ -84,4 +84,14 @@ public class CarDataBase implements ICarDataBase{
         }
         idMap = (long) jsonObject.get("idMap");
     }
+
+    @Override
+    public boolean rent(Long id) {
+        return carMap.get(id).rent();
+    }
+
+    @Override
+    public boolean unrent(Long id) {
+        return carMap.get(id).unrent();
+    }
 }

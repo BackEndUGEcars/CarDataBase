@@ -13,5 +13,7 @@ public interface ICarDataBase {
     String toJson();
     Map<Long, ICar> getAllCars();
     void init() throws IOException, ParseException;
+    boolean rent(Long id);
+    boolean unrent(Long id);
 
 }

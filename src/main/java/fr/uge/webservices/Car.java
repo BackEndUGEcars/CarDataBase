@@ -62,11 +62,19 @@ public class Car implements ICar{
     public boolean rent() {
         if (isRented){
             return false;
-        }else{
-            nbRent++;
-            isRented = true;
+        }
+        nbRent++;
+        isRented = true;
+        return true;
+
+    }
+
+    public boolean unrent(){
+        if (isRented){
+            isRented = false;
             return true;
         }
+        return false;
     }
 
     public float getRentPrice() {
@@ -138,6 +146,8 @@ public class Car implements ICar{
 
         return car;
     }
+
+
 
 
 }

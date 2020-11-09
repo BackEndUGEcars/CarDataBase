@@ -13,6 +13,7 @@ public interface ICar {
      * @return true if car successfully rented false otherwise
      */
     boolean rent();
+    boolean unrent();
 
     float getRentPrice();
     float getSellPrice();
