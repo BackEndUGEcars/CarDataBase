@@ -1,28 +1,30 @@
 package fr.uge.webservices;
 
-public interface ICar {
-    float addNoteCleanliness(float note);
-    float addNoteCar(float note);
+import java.rmi.RemoteException;
 
-    float getNoteCar();
-    float getNoteCarCleanliness();
+public interface ICar {
+    float addNoteCleanliness(float note) throws RemoteException;
+    float addNoteCar(float note) throws RemoteException ;
+
+    float getNoteCar() throws RemoteException ;
+    float getNoteCarCleanliness() throws RemoteException ;
 
 
     /**
      * call to rent the Car
      * @return true if car successfully rented false otherwise
      */
-    boolean rent();
-    boolean unrent();
+    boolean rent() throws RemoteException ;
+    boolean unrent() throws RemoteException ;
 
-    float getRentPrice();
-    float getSellPrice();
+    float getRentPrice() throws RemoteException ;
+    float getSellPrice() throws RemoteException ;
 
-    boolean isSellable();
+    boolean isSellable() throws RemoteException ;
 
-    String getModel();
-    String getImagePath();
+    String getModel() throws RemoteException ;
+    String getImagePath() throws RemoteException ;
 
-    String toJson(Long id);
+    String toJson(Long id) throws RemoteException ;
 
 }

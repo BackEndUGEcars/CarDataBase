@@ -4,6 +4,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.rmi.RemoteException;
+
 public class Car implements ICar{
     private Boolean isRented = false;
     private int nbRent = 0;
@@ -39,27 +41,27 @@ public class Car implements ICar{
         this.sellPrice = sellPrice;
     }
 
-    public float addNoteCleanliness(float note) {
+    public float addNoteCleanliness(float note) throws RemoteException {
         noteCarCleanliness = (noteCarCleanliness * nbNoteCarCleanliness + note) / (nbNoteCarCleanliness + 1 );
         nbNoteCarCleanliness++;
         return noteCarCleanliness;
     }
 
-    public float addNoteCar(float note) {
+    public float addNoteCar(float note)  throws RemoteException {
         noteCar = (noteCar * nbNoteCar + note) / (nbNoteCar + 1 );
         nbNoteCar++;
         return noteCar;
     }
 
-    public float getNoteCar() {
+    public float getNoteCar() throws RemoteException  {
         return noteCar;
     }
 
-    public float getNoteCarCleanliness() {
+    public float getNoteCarCleanliness() throws RemoteException  {
         return noteCarCleanliness;
     }
 
-    public boolean rent() {
+    public boolean rent() throws RemoteException  {
         if (isRented){
             return false;
         }
@@ -69,7 +71,7 @@ public class Car implements ICar{
 
     }
 
-    public boolean unrent(){
+    public boolean unrent() throws RemoteException {
         if (isRented){
             isRented = false;
             return true;
@@ -77,23 +79,23 @@ public class Car implements ICar{
         return false;
     }
 
-    public float getRentPrice() {
+    public float getRentPrice() throws RemoteException  {
         return rentPrice;
     }
 
-    public float getSellPrice() {
+    public float getSellPrice() throws RemoteException  {
         return sellPrice;
     }
 
-    public boolean isSellable(){
+    public boolean isSellable() throws RemoteException {
         return nbRent > 0;
     }
 
-    public String getModel() {
+    public String getModel()  throws RemoteException {
         return model;
     }
 
-    public String getImagePath() {
+    public String getImagePath()  throws RemoteException {
         return imagePath;
     }
 
@@ -113,7 +115,7 @@ public class Car implements ICar{
                 '}';
     }
 
-    public String toJson(Long id){
+    public String toJson(Long id) throws RemoteException {
         return "{" +
                 "'id':" + id +
                 ", 'isRented':" + isRented +

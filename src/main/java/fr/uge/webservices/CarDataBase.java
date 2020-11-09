@@ -8,6 +8,7 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.rmi.RemoteException;
 import java.util.*;
 
 public class CarDataBase implements ICarDataBase{
@@ -19,31 +20,32 @@ public class CarDataBase implements ICarDataBase{
         this.jsonFileName = jsonFileName;
     }
 
-    public Map<Long, ICar> getAllCars() {
+    public Map<Long, ICar> getAllCars() throws RemoteException {
         return Collections.unmodifiableMap(carMap);
     }
 
-    public ICar getCar(Long id){
+    public ICar getCar(Long id) throws RemoteException {
         return carMap.get(id);
     }
 
-    public boolean removeCar(Long id){
+    public boolean removeCar(Long id) throws RemoteException {
          return null != carMap.remove(id);
     }
 
-    public boolean addCar(ICar t){
+    public boolean addCar(ICar t) throws RemoteException {
         idMap++;
         carMap.put(idMap, t);
         return true;
     }
 
-    public Map<Long, ICar> getBuyableCar(){ //not rented and already rented once
+    public Map<Long, ICar> getBuyableCar() throws RemoteException { //not rented and already rented once
         var map = new HashMap<Long, ICar>();
-        carMap.forEach((id, c) -> {
-            if (c.isSellable()){
-                map.put(id, c);
+
+        for (Map.Entry<Long, ICar> entry : carMap.entrySet()) {
+            if (entry.getValue().isSellable()){
+                map.put(entry.getKey(), entry.getValue());
             }
-        });
+        }
         return map;
 
     }
@@ -55,11 +57,11 @@ public class CarDataBase implements ICarDataBase{
                 '}';
     }
 
-    public String toJson(){
+    public String toJson() throws RemoteException {
         var sj = new StringJoiner(", ");
-        carMap.forEach((id, c) -> {
-            sj.add(c.toJson(id));
-        });
+        for (Map.Entry<Long, ICar> entry : carMap.entrySet()) {
+            sj.add(entry.getValue().toJson(entry.getKey()));
+        }
         return "{" +
                 "    'cars': [" +
                  sj.toString() +
@@ -68,7 +70,7 @@ public class CarDataBase implements ICarDataBase{
 
 
 
-    public void init() throws IOException, ParseException{
+    public void init() throws IOException, ParseException, RemoteException {
         var json = IOUtils.toString(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream("test.json")), StandardCharsets.UTF_8);
         JSONParser parser = new JSONParser();
 
@@ -86,12 +88,12 @@ public class CarDataBase implements ICarDataBase{
     }
 
     @Override
-    public boolean rent(Long id) {
+    public boolean rent(Long id) throws RemoteException  {
         return carMap.get(id).rent();
     }
 
     @Override
-    public boolean unrent(Long id) {
+    public boolean unrent(Long id) throws RemoteException  {
         return carMap.get(id).unrent();
     }
 }

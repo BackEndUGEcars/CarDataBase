@@ -3,17 +3,18 @@ package fr.uge.webservices;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.Map;
 
 public interface ICarDataBase {
-    ICar getCar(Long id);
-    boolean removeCar(Long id);
-    boolean addCar(ICar t);
-    Map<Long, ICar> getBuyableCar();
-    String toJson();
-    Map<Long, ICar> getAllCars();
-    void init() throws IOException, ParseException;
-    boolean rent(Long id);
-    boolean unrent(Long id);
+    ICar getCar(Long id) throws RemoteException;
+    boolean removeCar(Long id) throws RemoteException ;
+    boolean addCar(ICar t) throws RemoteException ;
+    Map<Long, ICar> getBuyableCar() throws RemoteException ;
+    String toJson() throws RemoteException ;
+    Map<Long, ICar> getAllCars() throws RemoteException ;
+    void init() throws IOException, ParseException, RemoteException ;
+    boolean rent(Long id) throws RemoteException ;
+    boolean unrent(Long id) throws RemoteException ;
 
 }
