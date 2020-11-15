@@ -7,16 +7,19 @@ import org.json.simple.parser.ParseException;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
-public class CarDataBase implements ICarDataBase{
-    private Map<Long, ICar> carMap = new HashMap<>(); //Long for id
+public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
+	private Map<Long, ICar> carMap = new HashMap<>(); //Long for id
     private long idMap = 0;
     private String jsonFileName;
 
-    public CarDataBase(String jsonFileName) {
+    public CarDataBase(String jsonFileName) throws RemoteException {
+    	super();
         this.jsonFileName = jsonFileName;
     }
 
@@ -87,13 +90,14 @@ public class CarDataBase implements ICarDataBase{
         idMap = (long) jsonObject.get("idMap");
     }
 
+    /*
     @Override
     public boolean rent(Long id) throws RemoteException  {
-        return carMap.get(id).rent();
+        return carMap.get(id).rent(id);
     }
 
     @Override
     public boolean unrent(Long id) throws RemoteException  {
-        return carMap.get(id).unrent();
-    }
+        return carMap.get(id).unrent(id);
+    }*/
 }

@@ -4,10 +4,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 
-public class Car implements ICar{
-    private Boolean isRented = false;
+public class Car implements ICar, Serializable{
+    private long isRented = -1;
     private int nbRent = 0;
 
     private float noteCar = 0 ;
@@ -61,19 +62,22 @@ public class Car implements ICar{
         return noteCarCleanliness;
     }
 
-    public boolean rent() throws RemoteException  {
-        if (isRented){
+    public boolean rent(long id) throws RemoteException  {
+        if (isRented != -1){
             return false;
         }
         nbRent++;
-        isRented = true;
+        isRented = id;
         return true;
 
     }
 
-    public boolean unrent() throws RemoteException {
-        if (isRented){
-            isRented = false;
+    public boolean unrent(long id) throws RemoteException {
+        if (isRented != -1){
+        	if(isRented == id) {
+        		isRented = -1;
+        		return true;
+        	}
             return true;
         }
         return false;
@@ -130,12 +134,16 @@ public class Car implements ICar{
                 ", 'imagePath':" + imagePath +
                 '}';
     }
+    
+    public long isRented() throws RemoteException {
+    	return isRented;
+    }
 
     public static Car createCar(String json) throws ParseException {
         JSONParser parser = new JSONParser();
         var jsonObject = (JSONObject) parser.parse(json);
         var car = new Car();
-        car.isRented = (boolean) jsonObject.get("isRented");
+        car.isRented = (long) jsonObject.get("isRented");
         car.nbRent = ((Long) jsonObject.get("nbRent")).intValue();
         car.noteCar = ((Double) jsonObject.get("noteCar")).floatValue();
         car.nbNoteCar = ((Long) jsonObject.get("nbNoteCar")).intValue();
