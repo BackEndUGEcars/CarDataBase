@@ -6,9 +6,11 @@ import org.json.simple.parser.ParseException;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Car implements ICar, Serializable{
-    private long isRented = -1;
+	private long isRented = -1;
     private int nbRent = 0;
 
     private float noteCar = 0 ;
@@ -22,6 +24,8 @@ public class Car implements ICar, Serializable{
 
     private String model; //TODO
     private String imagePath; //TODO
+    
+    private final Queue<Long> rentQueue = new LinkedList<Long>();
 
 
 
@@ -64,6 +68,7 @@ public class Car implements ICar, Serializable{
 
     public boolean rent(long id) throws RemoteException  {
         if (isRented != -1){
+        	addEmployeeQueue(id);
             return false;
         }
         nbRent++;
@@ -72,15 +77,16 @@ public class Car implements ICar, Serializable{
 
     }
 
-    public boolean unrent(long id) throws RemoteException {
+    public long unrent() throws RemoteException {
         if (isRented != -1){
-        	if(isRented == id) {
-        		isRented = -1;
-        		return true;
-        	}
-            return true;
+            return -1L;
         }
-        return false;
+        isRented = -1L;
+        var newRent = removeEmployeeQueue();
+        if (newRent != -1) {
+        	rent(newRent);
+        }
+        return isRented;
     }
 
     public float getRentPrice() throws RemoteException  {
@@ -156,6 +162,24 @@ public class Car implements ICar, Serializable{
 
         return car;
     }
+    
+    public boolean addEmployeeQueue(Long idEmployee) {
+    	return rentQueue.offer(idEmployee);
+    }
+    
+    public long removeEmployeeQueue() {
+    	var res = rentQueue.poll();
+    	return res == null ? -1 : res;    
+    }
+
+	public Queue<Long> getRentQueue() throws RemoteException{
+		return rentQueue;
+	}
+    
+    
+   
+    
+    
 
 
 

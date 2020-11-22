@@ -15,8 +15,10 @@ public interface ICarDataBase extends Remote {
     String toJson() throws RemoteException ;
     Map<Long, ICar> getAllCars() throws RemoteException ;
     void init() throws IOException, ParseException, RemoteException ;
-    /*
-    boolean rent(Long id) throws RemoteException ;
-    boolean unrent(Long id) throws RemoteException ;*/
-
+    
+    boolean rent(Long carId, long employeeId) throws RemoteException ;
+    long unrent(Long id) throws RemoteException ;
+    String getBuyableCarsJson()throws RemoteException ;
+    String getCarJson(long id) throws RemoteException;
+    float getPriceOfCar(long id) throws RemoteException;
 }
