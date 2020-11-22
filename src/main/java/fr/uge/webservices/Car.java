@@ -163,11 +163,11 @@ public class Car implements ICar, Serializable{
         return car;
     }
     
-    public boolean addEmployeeQueue(Long idEmployee) {
+    public boolean addEmployeeQueue(Long idEmployee) throws RemoteException {
     	return rentQueue.offer(idEmployee);
     }
     
-    public long removeEmployeeQueue() {
+    public long removeEmployeeQueue() throws RemoteException{
     	var res = rentQueue.poll();
     	return res == null ? -1 : res;    
     }
