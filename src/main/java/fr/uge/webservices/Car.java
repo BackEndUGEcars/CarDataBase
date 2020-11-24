@@ -126,19 +126,19 @@ public class Car implements ICar, Serializable{
     }
 
     public String toJson(Long id) throws RemoteException {
-        return "{" +
-                "'id':" + id +
-                ", 'isRented':" + isRented +
-                ", 'nbRent':" + nbRent +
-                ", 'noteCar':" + noteCar +
-                ", 'nbNoteCar':" + nbNoteCar +
-                ", 'noteCarCleanliness':" + noteCarCleanliness +
-                ", 'nbNoteCarCleanliness':" + nbNoteCarCleanliness +
-                ", 'rentPrice':" + rentPrice +
-                ", 'sellPrice':" + sellPrice +
-                ", 'model':'" + model + '\'' +
-                ", 'imagePath':" + imagePath +
-                '}';
+    	 return "{" +
+                 "\"id\":" + id +
+                 ", \"isRented\":" + isRented +
+                 ", \"nbRent\":" + nbRent +
+                 ", \"noteCar\":" + noteCar +
+                 ", \"nbNoteCar\":" + nbNoteCar +
+                 ", \"noteCarCleanliness\":" + noteCarCleanliness +
+                 ", \"nbNoteCarCleanliness\":" + nbNoteCarCleanliness +
+                 ", \"rentPrice\":" + rentPrice +
+                 ", \"sellPrice\":" + sellPrice +
+                 ", \"model\":\"" + model + "\"" +
+                 ", \"imagePath\":\"" + imagePath + "\""  +
+                 "}";
     }
     
     public long isRented() throws RemoteException {

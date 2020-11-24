@@ -7,7 +7,6 @@ import org.json.simple.parser.ParseException;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -65,7 +64,7 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
             }
         }
         return "{" +
-        "    'cars': [" +
+        "    \"cars\": [" +
          sj.toString() +
         "]}";
     }
@@ -83,9 +82,9 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
             sj.add(entry.getValue().toJson(entry.getKey()));
         }
         return "{" +
-                "    'cars': [" +
+                "    \"cars\": [" +
                  sj.toString() +
-                "],    'idMap' : "+ idMap +"}";
+                "],    \"idMap\" : "+ idMap +"}";
     }
 
 
