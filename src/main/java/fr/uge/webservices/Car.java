@@ -11,8 +11,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class Car implements ICar, Serializable{
-    private long isRented = -1;
+public class Car extends UnicastRemoteObject implements ICar{
+	private long isRented = -1;
 
     private int nbRent = 0;
 
@@ -23,8 +23,8 @@ public class Car implements ICar, Serializable{
     private int nbNoteCarCleanliness = 0;
 
 
-    private float rentPrice; 
-    private float sellPrice; 
+    private float rentPrice; //en €
+    private float sellPrice; //en €
 
 
     private String model; //TODO

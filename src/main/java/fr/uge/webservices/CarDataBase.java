@@ -38,9 +38,11 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
         return carMap.get(id).toJson(id);
     }
 
+
     public String getCarJson(long id) throws RemoteException {
         return carMap.get(id).toJson(id);
     }
+
 
     public boolean removeCar(Long id) throws RemoteException {
         return null != carMap.remove(id);
@@ -77,6 +79,7 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
         "]}";
     }
 
+
     public String getBuyableCarsJson() throws RemoteException { //not rented and already rented once
         var sj = new StringJoiner(", ");
         for (Map.Entry<Long, ICar> entry : carMap.entrySet()) {
@@ -89,6 +92,7 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
                 sj.toString() +
                 "]}";
     }
+
 
     @Override
     public String toString() {

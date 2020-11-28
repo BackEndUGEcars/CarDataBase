@@ -12,6 +12,7 @@ public class App {
             LocateRegistry.createRegistry(1099);
 
 
+
             ICarDataBase c = new CarDataBase("test.json");
             c.init();
             Naming.bind("rmi://localhost:1099/CarDataBase", (Remote) c);
@@ -22,4 +23,4 @@ public class App {
         }
     }
 }
- 
+
