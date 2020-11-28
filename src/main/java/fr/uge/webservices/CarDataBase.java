@@ -39,11 +39,6 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
     }
 
 
-    public String getCarJson(long id) throws RemoteException {
-        return carMap.get(id).toJson(id);
-    }
-
-
     public boolean removeCar(Long id) throws RemoteException {
         return null != carMap.remove(id);
     }
@@ -77,20 +72,6 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
         "    \"cars\": [" +
          sj.toString() +
         "]}";
-    }
-
-
-    public String getBuyableCarsJson() throws RemoteException { //not rented and already rented once
-        var sj = new StringJoiner(", ");
-        for (Map.Entry<Long, ICar> entry : carMap.entrySet()) {
-            if (entry.getValue().isSellable()){
-                sj.add(entry.getValue().toJson(entry.getKey()));
-            }
-        }
-        return "{" +
-                "    'cars': [" +
-                sj.toString() +
-                "]}";
     }
 
 
