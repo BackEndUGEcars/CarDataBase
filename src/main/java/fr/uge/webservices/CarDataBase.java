@@ -65,7 +65,7 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
             }
         }
         return "{" +
-        "    'cars': [" +
+        "    \"cars\": [" +
          sj.toString() +
         "]}";
     }
@@ -83,9 +83,9 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
             sj.add(entry.getValue().toJson(entry.getKey()));
         }
         return "{" +
-                "    'cars': [" +
+                "    \"cars\": [" +
                  sj.toString() +
-                "],    'idMap' : "+ idMap +"}";
+                "],    \"idMap\" : "+ idMap +"}";
     }
 
 
