@@ -14,12 +14,15 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.*;
 
 public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
-    private Map<Long, ICar> carMap = new HashMap<>(); //Long for id
+
+	private Map<Long, ICar> carMap = new HashMap<>(); //Long for id
+
     private long idMap = 0;
     private String jsonFileName;
 
     public CarDataBase(String jsonFileName) throws RemoteException {
         super();
+
         this.jsonFileName = jsonFileName;
     }
 
@@ -29,6 +32,10 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
 
     public ICar getCar(Long id) throws RemoteException {
         return carMap.get(id);
+    }
+    
+    public String getCarJson(long id) throws RemoteException {
+        return carMap.get(id).toJson(id);
     }
 
     public String getCarJson(long id) throws RemoteException {
@@ -55,6 +62,19 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
         }
         return map;
 
+    }
+    
+    public String getBuyableCarsJson() throws RemoteException { //not rented and already rented once
+        var sj = new StringJoiner(", ");
+        for (Map.Entry<Long, ICar> entry : carMap.entrySet()) {
+            if (entry.getValue().isSellable()){
+            	sj.add(entry.getValue().toJson(entry.getKey()));
+            }
+        }
+        return "{" +
+        "    \"cars\": [" +
+         sj.toString() +
+        "]}";
     }
 
     public String getBuyableCarsJson() throws RemoteException { //not rented and already rented once
@@ -83,9 +103,10 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
             sj.add(entry.getValue().toJson(entry.getKey()));
         }
         return "{" +
-                "    'cars': [" +
-                sj.toString() +
-                "],    'idMap' : "+ idMap +"}";
+                "    \"cars\": [" +
+                 sj.toString() +
+                "],    \"idMap\" : "+ idMap +"}";
+
     }
 
 
@@ -106,19 +127,21 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
         }
         idMap = (long) jsonObject.get("idMap");
     }
-
+    
     public float getPriceOfCar(long id) throws RemoteException{
-        return carMap.get(id).getSellPrice();
+    	return carMap.get(id).getSellPrice();
     }
 
-    /*
+
+    
     @Override
-    public boolean rent(Long id) throws RemoteException  {
-        return carMap.get(id).rent(id);
+    public boolean rent(Long carId, long employeeId) throws RemoteException  {
+        return carMap.get(carId).rent(employeeId);
     }
 
     @Override
-    public boolean unrent(Long id) throws RemoteException  {
-        return carMap.get(id).unrent(id);
-    }*/
+    public long unrent(Long id) throws RemoteException  {
+        return carMap.get(id).unrent();
+    }
+
 }

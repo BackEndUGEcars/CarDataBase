@@ -2,7 +2,7 @@
     "cars": [
           {
             "id" : 0,
-            "isRented" : -1,
+            "isRented" : false,
             "nbRent" : 3,
             "noteCar" : 2.5,
             "nbNoteCar" : 2,
@@ -16,7 +16,7 @@
           },
           {
             "id" : 1,
-            "isRented" : -1,
+            "isRented" : true,
             "nbRent" : 1,
             "noteCar" : 2.5,
             "nbNoteCar" : 1,

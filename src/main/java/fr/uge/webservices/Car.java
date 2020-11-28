@@ -6,9 +6,14 @@ import org.json.simple.parser.ParseException;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 public class Car implements ICar, Serializable{
     private long isRented = -1;
+
     private int nbRent = 0;
 
     private float noteCar = 0 ;
@@ -17,27 +22,27 @@ public class Car implements ICar, Serializable{
     private float noteCarCleanliness = 0;
     private int nbNoteCarCleanliness = 0;
 
-    private float rentPrice; //en â‚¬
-    private float sellPrice; //en â‚¬
+
+    private float rentPrice; 
+    private float sellPrice; 
+
 
     private String model; //TODO
     private String imagePath; //TODO
+    
+    private final Queue<Long> rentQueue = new LinkedList<Long>();
 
-
-
-
-
-    private Car() {
+    private Car() throws RemoteException {
     }
 
-    public Car(float rentPrice, float sellPrice, String model, String imagePath) {
+    public Car(float rentPrice, float sellPrice, String model, String imagePath) throws RemoteException {
         this.rentPrice = rentPrice;
         this.sellPrice = sellPrice;
         this.model = model;
         this.imagePath = imagePath;
     }
 
-    public Car(float rentPrice, float sellPrice) {
+    public Car(float rentPrice, float sellPrice) throws RemoteException {
         this.rentPrice = rentPrice;
         this.sellPrice = sellPrice;
     }
@@ -64,6 +69,9 @@ public class Car implements ICar, Serializable{
 
     public boolean rent(long id) throws RemoteException  {
         if (isRented != -1){
+
+        	addEmployeeQueue(id);
+
             return false;
         }
         nbRent++;
@@ -72,15 +80,18 @@ public class Car implements ICar, Serializable{
 
     }
 
-    public boolean unrent(long id) throws RemoteException {
-        if (isRented != -1){
-            if(isRented == id) {
-                isRented = -1;
-                return true;
-            }
-            return true;
+
+    public long unrent() throws RemoteException {
+        if (isRented == -1){
+            return -1L;
         }
-        return false;
+        isRented = -1L;
+        var newRent = removeEmployeeQueue();
+        if (newRent != -1) {
+        	rent(newRent);
+
+        }
+        return isRented;
     }
 
     public float getRentPrice() throws RemoteException  {
@@ -120,26 +131,28 @@ public class Car implements ICar, Serializable{
     }
 
     public String toJson(Long id) throws RemoteException {
-        return "{" +
-                "'id':" + id +
-                ", 'isRented':" + isRented +
-                ", 'nbRent':" + nbRent +
-                ", 'noteCar':" + noteCar +
-                ", 'nbNoteCar':" + nbNoteCar +
-                ", 'noteCarCleanliness':" + noteCarCleanliness +
-                ", 'nbNoteCarCleanliness':" + nbNoteCarCleanliness +
-                ", 'rentPrice':" + rentPrice +
-                ", 'sellPrice':" + sellPrice +
-                ", 'model':'" + model + '\'' +
-                ", 'imagePath':" + imagePath +
-                '}';
-    }
 
+   	 	return "{" +
+                "\"id\":" + id +
+                ", \"isRented\":" + isRented +
+                ", \"nbRent\":" + nbRent +
+                ", \"noteCar\":" + noteCar +
+                ", \"nbNoteCar\":" + nbNoteCar +
+                ", \"noteCarCleanliness\":" + noteCarCleanliness +
+                ", \"nbNoteCarCleanliness\":" + nbNoteCarCleanliness +
+                ", \"rentPrice\":" + rentPrice +
+                ", \"sellPrice\":" + sellPrice +
+                ", \"model\":\"" + model + "\"" +
+                ", \"imagePath\":\"" + imagePath + "\""  +
+                "}";
+   }
+    
     public long isRented() throws RemoteException {
-        return isRented;
+    	return isRented;
     }
 
-    public static Car createCar(String json) throws ParseException {
+    public static Car createCar(String json) throws ParseException, RemoteException {
+
         JSONParser parser = new JSONParser();
         var jsonObject = (JSONObject) parser.parse(json);
         var car = new Car();
@@ -156,6 +169,19 @@ public class Car implements ICar, Serializable{
 
         return car;
     }
+    
+    public boolean addEmployeeQueue(Long idEmployee) throws RemoteException {
+    	return rentQueue.offer(idEmployee);
+    }
+    
+    public long removeEmployeeQueue() throws RemoteException{
+    	var res = rentQueue.poll();
+    	return res == null ? -1 : res;    
+    }
+
+	public Queue<Long> getRentQueue() throws RemoteException{
+		return rentQueue;
+	}
 
 
 
