@@ -1,5 +1,4 @@
 package fr.uge.webservices;
-
 import java.rmi.Naming;
 
 import java.rmi.Remote;
@@ -15,9 +14,8 @@ public class App {
 
             ICarDataBase c = new CarDataBase("test.json");
             c.init();
-            Naming.bind("rmi://localhost:1099/CarDataBase", (Remote) c);
-
-            System.out.println("RMI ok");
+            Naming.bind("rmi://localhost:1099/CarDataBase", c);
+            System.out.println("CarDataBase RMI loaded");
         } catch (Exception e) {
             System.err.println("Problem: " + e);
         }
