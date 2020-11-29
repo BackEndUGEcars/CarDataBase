@@ -18,7 +18,9 @@ import java.util.*;
  *
  */
 public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
+
 	private Map<Long, ICar> carMap = new HashMap<>(); //Long for id
+
     private long idMap = 0;
     private String jsonFileName;
 
@@ -28,7 +30,8 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
      * @throws RemoteException
      */
     public CarDataBase(String jsonFileName) throws RemoteException {
-    	super();
+        super();
+
         this.jsonFileName = jsonFileName;
     }
 
@@ -68,7 +71,7 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
      * @throws RemoteException
      */
     public boolean removeCar(Long id) throws RemoteException {
-         return null != carMap.remove(id);
+        return null != carMap.remove(id);
     }
 
     /*
@@ -118,6 +121,7 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
         "]}";
     }
 
+
     @Override
     public String toString() {
         return "CarDataBase{" +
@@ -139,6 +143,7 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
                 "    \"cars\": [" +
                  sj.toString() +
                 "],    \"idMap\" : "+ idMap +"}";
+
     }
 
     /*
@@ -194,4 +199,5 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
     public long unrent(Long id) throws RemoteException  {
         return carMap.get(id).unrent();
     }
+
 }

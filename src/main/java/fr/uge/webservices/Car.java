@@ -16,6 +16,7 @@ import java.util.Queue;
  */
 public class Car extends UnicastRemoteObject implements ICar{
 	private long isRented = -1;
+
     private int nbRent = 0;
 
     private float noteCar = 0 ;
@@ -24,8 +25,10 @@ public class Car extends UnicastRemoteObject implements ICar{
     private float noteCarCleanliness = 0;
     private int nbNoteCarCleanliness = 0;
 
+
     private float rentPrice; //en €
     private float sellPrice; //en €
+
 
     private String model; //TODO
     private String imagePath; //TODO
@@ -107,7 +110,9 @@ public class Car extends UnicastRemoteObject implements ICar{
      */
     public boolean rent(long id) throws RemoteException  {
         if (isRented != -1){
+
         	addEmployeeQueue(id);
+
             return false;
         }
         nbRent++;
@@ -129,6 +134,7 @@ public class Car extends UnicastRemoteObject implements ICar{
         var newRent = removeEmployeeQueue();
         if (newRent != -1) {
         	rent(newRent);
+
         }
         return isRented;
     }
@@ -201,6 +207,7 @@ public class Car extends UnicastRemoteObject implements ICar{
      * @throws RemoteException
      */
     public String toJson(Long id) throws RemoteException {
+
    	 	return "{" +
                 "\"id\":" + id +
                 ", \"isRented\":" + isRented +
@@ -232,6 +239,7 @@ public class Car extends UnicastRemoteObject implements ICar{
      * @throws RemoteException
      */
     public static Car createCar(String json) throws ParseException, RemoteException {
+
         JSONParser parser = new JSONParser();
         var jsonObject = (JSONObject) parser.parse(json);
         var car = new Car();
