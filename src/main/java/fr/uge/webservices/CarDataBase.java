@@ -111,7 +111,7 @@ public class CarDataBase extends UnicastRemoteObject implements ICarDataBase{
     public String getBuyableCarsJson() throws RemoteException { //not rented and already rented once
         var sj = new StringJoiner(", ");
         for (Map.Entry<Long, ICar> entry : carMap.entrySet()) {
-            if (entry.getValue().isSellable()){
+            if (entry.getValue().isSellable() && entry.getValue().isRented() == -1){
             	sj.add(entry.getValue().toJson(entry.getKey()));
             }
         }
