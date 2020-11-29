@@ -10,9 +10,12 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
 import java.util.Queue;
 
-
-public class Car implements ICar, Serializable{
-    private long isRented = -1;
+/**
+ * Allow to manage Car
+ *
+ */
+public class Car extends UnicastRemoteObject implements ICar{
+	private long isRented = -1;
 
     private int nbRent = 0;
 
@@ -23,8 +26,8 @@ public class Car implements ICar, Serializable{
     private int nbNoteCarCleanliness = 0;
 
 
-    private float rentPrice; 
-    private float sellPrice; 
+    private float rentPrice; //en €
+    private float sellPrice; //en €
 
 
     private String model; //TODO
@@ -35,6 +38,14 @@ public class Car implements ICar, Serializable{
     private Car() throws RemoteException {
     }
 
+    /**
+     * Car constructor
+     * @param rentPrice, the rent price
+     * @param sellPrice, the sell price
+     * @param model, the model
+     * @param imagePath, the image path
+     * @throws RemoteException
+     */
     public Car(float rentPrice, float sellPrice, String model, String imagePath) throws RemoteException {
         this.rentPrice = rentPrice;
         this.sellPrice = sellPrice;
@@ -42,31 +53,61 @@ public class Car implements ICar, Serializable{
         this.imagePath = imagePath;
     }
 
+    /**
+     * Car constructor
+     * @param rentPrice, the rent price
+     * @param sellPrice, the sell price
+     * @throws RemoteException
+     */
     public Car(float rentPrice, float sellPrice) throws RemoteException {
         this.rentPrice = rentPrice;
         this.sellPrice = sellPrice;
     }
 
+    /*
+     * Add a cleanliness note to the car
+     * @param note, the cleanliness note
+     * @throws RemoteException
+     */
     public float addNoteCleanliness(float note) throws RemoteException {
         noteCarCleanliness = (noteCarCleanliness * nbNoteCarCleanliness + note) / (nbNoteCarCleanliness + 1 );
         nbNoteCarCleanliness++;
         return noteCarCleanliness;
     }
 
+    /*
+     * Add a note to the car
+     * @param note, the note
+     * @throws RemoteException
+     */
     public float addNoteCar(float note)  throws RemoteException {
         noteCar = (noteCar * nbNoteCar + note) / (nbNoteCar + 1 );
         nbNoteCar++;
         return noteCar;
     }
 
+    /*
+     * Get the car note
+     * @throws RemoteException
+     */
     public float getNoteCar() throws RemoteException  {
         return noteCar;
     }
 
+    /*
+     * Get the car cleanliness note
+     * @throws RemoteException
+     */
     public float getNoteCarCleanliness() throws RemoteException  {
         return noteCarCleanliness;
     }
 
+    /*
+     * Rent the car
+     * @param id, the location id
+     * @return boolean, true if the car can be rented, false either
+     * @throws RemoteException
+     */
     public boolean rent(long id) throws RemoteException  {
         if (isRented != -1){
 
@@ -80,7 +121,11 @@ public class Car implements ICar, Serializable{
 
     }
 
-
+    /*
+     * Unrent the car
+     * @return long, -1 if there is no other location, either, the id of the new location
+     * @throws RemoteException
+     */
     public long unrent() throws RemoteException {
         if (isRented == -1){
             return -1L;
@@ -93,23 +138,48 @@ public class Car implements ICar, Serializable{
         }
         return isRented;
     }
-
+    
+    /*
+     * Get the rent price
+     * @return float, the rent price
+     * @throws RemoteException
+     */
     public float getRentPrice() throws RemoteException  {
         return rentPrice;
     }
 
+    /*
+     * Get the sell price
+     * @return float, the sell price
+     * @throws RemoteException
+     */
     public float getSellPrice() throws RemoteException  {
         return sellPrice;
     }
 
+    /*
+     * Check if the car is sellable
+     * @return boolean, true if the car is sellable, false either
+     * @throws RemoteException
+     */
     public boolean isSellable() throws RemoteException {
         return nbRent > 0;
     }
 
+    /*
+     * Get the car model
+     * @return String, the car model
+     * @throws RemoteException
+     */
     public String getModel()  throws RemoteException {
         return model;
     }
 
+    /*
+     * Get the image path
+     * @return String, the image path
+     * @throws RemoteException
+     */
     public String getImagePath()  throws RemoteException {
         return imagePath;
     }
@@ -130,6 +200,12 @@ public class Car implements ICar, Serializable{
                 '}';
     }
 
+    /*
+     * Get the JSON representation of the car
+     * @param id, the car id
+     * @return String, the car JSON representation
+     * @throws RemoteException
+     */
     public String toJson(Long id) throws RemoteException {
 
    	 	return "{" +
@@ -147,10 +223,21 @@ public class Car implements ICar, Serializable{
                 "}";
    }
     
+    /*
+     * Check if the car is rented
+     * @return long, the id of the actual location
+     * @throws RemoteException
+     */
     public long isRented() throws RemoteException {
     	return isRented;
     }
 
+    /*
+     * Create a car from a JSON
+     * @param json, the car JSON representation
+     * @return Car, the new Car 
+     * @throws RemoteException
+     */
     public static Car createCar(String json) throws ParseException, RemoteException {
 
         JSONParser parser = new JSONParser();
@@ -170,15 +257,31 @@ public class Car implements ICar, Serializable{
         return car;
     }
     
+    /*
+     * Add an employee to the location queue
+     * @param idEmployee, the id of the employee
+     * @return boolean, true if the employee can be added, false either
+     * @throws RemoteException
+     */
     public boolean addEmployeeQueue(Long idEmployee) throws RemoteException {
     	return rentQueue.offer(idEmployee);
     }
     
+    /*
+     * Remove an employee from the location queue
+     * @return long, true if the employee can be added, false either
+     * @throws RemoteException
+     */
     public long removeEmployeeQueue() throws RemoteException{
     	var res = rentQueue.poll();
     	return res == null ? -1 : res;    
     }
 
+    /*
+     * Get the rent queue
+     * @return Queue<Long>, the rent queue
+     * @throws RemoteException
+     */
 	public Queue<Long> getRentQueue() throws RemoteException{
 		return rentQueue;
 	}

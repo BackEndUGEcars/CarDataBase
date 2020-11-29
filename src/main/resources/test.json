@@ -3,29 +3,169 @@
           {
             "id" : 0,
             "isRented" : -1,
-            "nbRent" : 3,
-            "noteCar" : 2.5,
-            "nbNoteCar" : 2,
-            "noteCarCleanliness" : 4.0,
-            "nbNoteCarCleanliness" : 1,
-            "rentPrice" : 100.0,
+            "nbRent" : 0,
+            "noteCar" : 0.0,
+            "nbNoteCar" : 0,
+            "noteCarCleanliness" : 0.0,
+            "nbNoteCarCleanliness" : 0,
+            "rentPrice" : 50.0,
             "sellPrice" : 10000.0,
-            "model" : "",
-            "imagePath" : ""
+            "model" : "Fiat 500",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/fiat-500-2d-weiss-2020.png"
 
           },
           {
             "id" : 1,
             "isRented" : -1,
-            "nbRent" : 1,
-            "noteCar" : 2.5,
-            "nbNoteCar" : 1,
+            "nbRent" : 0,
+            "noteCar" : 0.0,
+            "nbNoteCar" : 0,
             "noteCarCleanliness" : 0.0,
             "nbNoteCarCleanliness" : 0,
-            "rentPrice" : 1500.0,
-            "sellPrice" : 100400.0,
-            "model" : "",
-            "imagePath" : ""
+            "rentPrice" : 60.0,
+            "sellPrice" : 8500.0,
+            "model" : "Peugeot 208",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/peugeot-208-5d-schwarz-2012.png"
+
+          },
+          {
+            "id" : 2,
+            "isRented" : -1,
+            "nbRent" : 3,
+            "noteCar" : 12.5,
+            "nbNoteCar" : 3,
+            "noteCarCleanliness" : 18.0,
+            "nbNoteCarCleanliness" : 3,
+            "rentPrice" : 65.0,
+            "sellPrice" : 9000.0,
+            "model" : "Peugeot 308",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/peugeot-308-5d-weiss-2014.png"
+
+          },
+          {
+            "id" : 3,
+            "isRented" : -1,
+            "nbRent" : 6,
+            "noteCar" : 15.0,
+            "nbNoteCar" : 6,
+            "noteCarCleanliness" : 14.5,
+            "nbNoteCarCleanliness" : 6,
+            "rentPrice" : 70.0,
+            "sellPrice" : 11000.0,
+            "model" : "Renault Captur",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/renault-captur-5d-weiss-2018.png"
+
+          },
+          {
+            "id" : 4,
+            "isRented" : -1,
+            "nbRent" : 2,
+            "noteCar" : 17.4,
+            "nbNoteCar" : 2,
+            "noteCarCleanliness" : 15.0,
+            "nbNoteCarCleanliness" : 2,
+            "rentPrice" : 90.0,
+            "sellPrice" : 12000.0,
+            "model" : "Audi A1 SportBack",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/audi-a1-sportback-gelb-2019.png"
+
+          },
+          {
+            "id" : 5,
+            "isRented" : -1,
+            "nbRent" : 1,
+            "noteCar" : 19.0,
+            "nbNoteCar" : 1,
+            "noteCarCleanliness" : 19.0,
+            "nbNoteCarCleanliness" : 1,
+            "rentPrice" : 70.0,
+            "sellPrice" : 10000.0,
+            "model" : "VW Golf",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/vw-golf-5d-grau-2020.png"
+
+          },
+          {
+            "id" : 6,
+            "isRented" : -1,
+            "nbRent" : 7,
+            "noteCar" : 13.8,
+            "nbNoteCar" : 7,
+            "noteCarCleanliness" : 17.3,
+            "nbNoteCarCleanliness" : 7,
+            "rentPrice" : 60.0,
+            "sellPrice" : 8000.0,
+            "model" : "Peugeot 308 Aut.",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/peugeot-308-5d-weiss-2014.png"
+
+          },
+          {
+            "id" : 7,
+            "isRented" : -1,
+            "nbRent" : 4,
+            "noteCar" : 12.4,
+            "nbNoteCar" : 4,
+            "noteCarCleanliness" : 15.0,
+            "nbNoteCarCleanliness" : 4,
+            "rentPrice" : 80.0,
+            "sellPrice" : 9000.0,
+            "model" : "BMW Serie 1",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/bmw-1er-5d-weiss-2019.png"
+
+          },
+          {
+            "id" : 8,
+            "isRented" : -1,
+            "nbRent" : 5,
+            "noteCar" : 5.6,
+            "nbNoteCar" : 5,
+            "noteCarCleanliness" : 3.2,
+            "nbNoteCarCleanliness" : 5,
+            "rentPrice" : 75.0,
+            "sellPrice" : 9800.0,
+            "model" : "VW T-ROC Aut.",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/vw-t-roc-suv-schwarz-2019.png"
+
+          },
+          {
+            "id" : 9,
+            "isRented" : -1,
+            "nbRent" : 1,
+            "noteCar" : 16.0,
+            "nbNoteCar" : 1,
+            "noteCarCleanliness" : 18.0,
+            "nbNoteCarCleanliness" : 1,
+            "rentPrice" : 70.0,
+            "sellPrice" : 8700.0,
+            "model" : "Peugeot 3008",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/peugeot-3008-5d-braun-2016.png"
+
+          },
+          {
+            "id" : 10,
+            "isRented" : -1,
+            "nbRent" : 12,
+            "noteCar" : 16.7,
+            "nbNoteCar" : 12,
+            "noteCarCleanliness" : 14.2,
+            "nbNoteCarCleanliness" : 12,
+            "rentPrice" : 90.0,
+            "sellPrice" : 1100.0,
+            "model" : "Audi Q3",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/audi-q3-5d-silber-2019.png"
+
+          },
+          {
+            "id" : 11,
+            "isRented" : -1,
+            "nbRent" : 2,
+            "noteCar" : 16.5,
+            "nbNoteCar" : 2,
+            "noteCarCleanliness" : 19.0,
+            "nbNoteCarCleanliness" : 2,
+            "rentPrice" : 95.0,
+            "sellPrice" : 1150.0,
+            "model" : "Renault Talisman Aut.",
+            "imagePath" : "https://www.sixt.fr/fileadmin/files/global/user_upload/fleet/png/350x200/renault-talisman-4d-lila-2016.png"
 
           }
 
